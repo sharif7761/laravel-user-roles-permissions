@@ -1,55 +1,5 @@
 # **Laravel RESTful API for User, Role, and Permission Management**
 
-This project is a RESTful API built with Laravel  and Passport for managing users, roles, and permissions.
-
----
-
-## **Features**
-
-### **User Management**
-- Users can have multiple roles.
-- Users can have multiple permissions, either directly assigned or inherited through roles.
-
-### **Role Management**
-- Roles can have multiple permissions.
-
-### **Permission Management**
-- CRUD operations for permissions.
-- Assign permissions to roles and users.
-
-### **Authentication**
-- Secure token-based authentication using Laravel Passport.
-- Routes are protected by middleware.
-
-### **Authorization**
-- Middleware verifies a user's permissions before granting access to specific API routes.
-
-### **Clean Architecture**
-- Repository Pattern ensures maintainable and testable code.
-- Follows PSR coding standards for clean and consistent coding.
-
----
-
-## **API Endpoints**
-
-### **Authentication**
-- **POST** `/api/register` - User registration.
-- **POST** `/api/login` - User login and token generation.
-
-### **User Management**
-- **POST** `/api/users/{userId}/roles` - Assign roles to a user.
-- **GET** `/api/users/{userId}/permissions` - Retrieve all permissions of a user.
-- **POST** `/api/users/{userId}/permission` - Assign a permission directly to a user.
-
-### **Role Management**
-- **GET, POST, PUT, DELETE** `/api/roles` - Role CRUD operations.
-- **POST** `/api/roles/{roleId}/permissions` - Assign permissions to a role.
-
-### **Permission Management**
-- **GET, POST, PUT, DELETE** `/api/permissions` - Permission CRUD operations.
-
----
-
 ## **Setup Instructions**
 
 ### **Step 1: Clone the Repository**
