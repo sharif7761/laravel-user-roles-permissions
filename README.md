@@ -55,7 +55,7 @@ This project is a RESTful API built with Laravel  and Passport for managing user
 ### **Step 1: Clone the Repository**
 ```bash
 git clone https://github.com/sharif7761/laravel-user-roles-permissions.git
-cd laravel-restful-api
+cd laravel-user-roles-permissions
 ```
 
 ### **Step 2: Install Dependencies**

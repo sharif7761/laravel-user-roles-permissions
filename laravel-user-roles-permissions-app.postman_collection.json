@@ -1,0 +1,573 @@
+{
+	"info": {
+		"_postman_id": "9aeb721b-ac1e-433c-b696-f5279f5d5564",
+		"name": "laravel-user-roles-permissions-app",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "22073465"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"email\": \"john@example.com\",\r\n  \"password\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{laravel_base_url}}/api/login",
+							"host": [
+								"{{laravel_base_url}}"
+							],
+							"path": [
+								"api",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "register",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"name\": \"john doe\",\r\n  \"email\": \"john@example.com\",\r\n  \"password\": \"password123\",\r\n  \"password_confirmation\": \"password123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{laravel_base_url}}/api/register",
+							"host": [
+								"{{laravel_base_url}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "logout",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZTMyNDNiNGJhYTg1YjYzZjkxNzNlNDhmNzE0MzZiNWI3YjMxODA2Y2MyNDdhZjYyNTY2ODRjODQyM2YzZjI3MWM1ZTRlNTIwNThmY2NjYjUiLCJpYXQiOjE3MzM2NTk3ODEuMDExMTIsIm5iZiI6MTczMzY1OTc4MS4wMTExMjMsImV4cCI6MTc2NTE5NTc4MS4wMDQ2NDUsInN1YiI6IjMiLCJzY29wZXMiOltdfQ.p1GWuwAZzYlA8CEnbVMJYWws5nhKZMbv8slhoDmqqDKj-lQqg_s7BI_Cw7Q7mFZE5YJBDYsZDCWamoYpXnuZHVSp6MIwaDmv6sO2Bp1evzZbP84bnlbwsCYpH0yFwtZ1-lCk7wW0U0y78IY4SCU89RrukMiIkUJDSECDgOCNhr8H4SvDUXIcFoTfwnAGrlE0iLJr9eCKsH0kiuVp-rC9Bp6Cfa-Kl4m9tc7cD5xTrnxmjYzh2OsNysUj8RLyo-lJJecjm7xDBiHUIchwhs9EZ5t8UA9P3QZfHjT1AFtymGaq8EnU_gwC3zPLL7iJ_p5e2p286Cfkn6acTWAwPqxGBnNRdDMbAZb27i5_2t_Ly4L2QBk69KkCLSrt_IG2Z3VtMIyGVKSKeAMuwN-oRpODpghzd3VoPE2v9QmIDb_wTdJjBcL4qlVw6o3BLEAVWxJU9qjJWWSkcSaH9Gwz5AUHfXvcUJIbucrsftKj-k-Zqr850AOVDWRtDryly_jtcO8wCnG3ZqVKstIqUvFyOri2WcDOQoRyBDVaV1PvjYnLCAsO-yZBWD6C35bg5Gnt3CNKE-9PkdvSCgF5OKG0MOw55M2UBrrsNbp14SHU2Sdrg83g5TUjPh4Ge7fbUZ6gl3WvI92NBinKgWxXv3rVyt0XBdRlimklE8RajYBu4yQ79n8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"logout"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "roles",
+			"item": [
+				{
+					"name": "get-all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjVkMGFhNTNhN2MyOGI4M2IxZTJkMDM4NGI1NDk3MDJmYmZjOWZlN2M3OGRkMmExMzhkNDRlOTJiMWRkOTkzYzU0ZGQ2OTA1OWIzMjM0ZGEiLCJpYXQiOjE3MzM2NjE2MjkuOTE3ODg3LCJuYmYiOjE3MzM2NjE2MjkuOTE3ODg5LCJleHAiOjE3NjUxOTc2MjkuOTEyNDU2LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.KVDSMEsSPKGujbKuTbtJhubsLxI7mEhiED4fOwd1mJmE56ovMHKKvEYa9D79m9URhVxuUkxuer_cwdG-kCfKelQLgQHsTJZqf-RDhU9eDi6Ordi-fS5ElLV9u3kvw5Y3iwv2LBIlDWtHf_phSjzApvd0KwI1iqq_u5PthpFmADUfMNwYMEq1mjprNnrPvnYIYhsur2cN1nqD9s0XfhusEqpAUMrMU8fFuA_1iH1a6TZ9pJmwaNWo450H6sKEebjdn4fPisV1cbvRr71wYBeMn-h4vBjPJ-Ay-PoNcUf1aFLffmJNm73wkfUSuvwo5wY9dooJzT0gGsqw2aE54GQ8csHzmfw4J0PTCPfMkDA4STu62I4Mi6wFyIBx4L6oN3oeEtCJ2djeQ2-jPwQ3RyxP_T_vimfk4qEDpnLYwewBbeDHPVKtAg6OQSqhz4vDmKWC9NfZpf5Tgf19tHVBdu_APIo4-FN4CU5_mTsWUNgvCwY3A0TuqXLkUfnzIddQUw_-Xj5xdLS5Gzm6cmXPXhAPRIWLpKG4MR98aDnfq1MSk_55jFENiR0VX5Va2RFPR_2bwXlgMA6nU2dbGoT4yswUxluf65p3-N7QEa5jICn4uncq2JP1ogQEyi2GCRss0oj4MHrO1ZidfGu4xSExZIFH4FAsZZXPk_W1cvKaaEuKf8I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{laravel_base_url}}/api/roles",
+							"host": [
+								"{{laravel_base_url}}"
+							],
+							"path": [
+								"api",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjVkMGFhNTNhN2MyOGI4M2IxZTJkMDM4NGI1NDk3MDJmYmZjOWZlN2M3OGRkMmExMzhkNDRlOTJiMWRkOTkzYzU0ZGQ2OTA1OWIzMjM0ZGEiLCJpYXQiOjE3MzM2NjE2MjkuOTE3ODg3LCJuYmYiOjE3MzM2NjE2MjkuOTE3ODg5LCJleHAiOjE3NjUxOTc2MjkuOTEyNDU2LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.KVDSMEsSPKGujbKuTbtJhubsLxI7mEhiED4fOwd1mJmE56ovMHKKvEYa9D79m9URhVxuUkxuer_cwdG-kCfKelQLgQHsTJZqf-RDhU9eDi6Ordi-fS5ElLV9u3kvw5Y3iwv2LBIlDWtHf_phSjzApvd0KwI1iqq_u5PthpFmADUfMNwYMEq1mjprNnrPvnYIYhsur2cN1nqD9s0XfhusEqpAUMrMU8fFuA_1iH1a6TZ9pJmwaNWo450H6sKEebjdn4fPisV1cbvRr71wYBeMn-h4vBjPJ-Ay-PoNcUf1aFLffmJNm73wkfUSuvwo5wY9dooJzT0gGsqw2aE54GQ8csHzmfw4J0PTCPfMkDA4STu62I4Mi6wFyIBx4L6oN3oeEtCJ2djeQ2-jPwQ3RyxP_T_vimfk4qEDpnLYwewBbeDHPVKtAg6OQSqhz4vDmKWC9NfZpf5Tgf19tHVBdu_APIo4-FN4CU5_mTsWUNgvCwY3A0TuqXLkUfnzIddQUw_-Xj5xdLS5Gzm6cmXPXhAPRIWLpKG4MR98aDnfq1MSk_55jFENiR0VX5Va2RFPR_2bwXlgMA6nU2dbGoT4yswUxluf65p3-N7QEa5jICn4uncq2JP1ogQEyi2GCRss0oj4MHrO1ZidfGu4xSExZIFH4FAsZZXPk_W1cvKaaEuKf8I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Admin\",\r\n    \"permissions\": [1, 2] // nullable\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{laravel_base_url}}/api/roles",
+							"host": [
+								"{{laravel_base_url}}"
+							],
+							"path": [
+								"api",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjVkMGFhNTNhN2MyOGI4M2IxZTJkMDM4NGI1NDk3MDJmYmZjOWZlN2M3OGRkMmExMzhkNDRlOTJiMWRkOTkzYzU0ZGQ2OTA1OWIzMjM0ZGEiLCJpYXQiOjE3MzM2NjE2MjkuOTE3ODg3LCJuYmYiOjE3MzM2NjE2MjkuOTE3ODg5LCJleHAiOjE3NjUxOTc2MjkuOTEyNDU2LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.KVDSMEsSPKGujbKuTbtJhubsLxI7mEhiED4fOwd1mJmE56ovMHKKvEYa9D79m9URhVxuUkxuer_cwdG-kCfKelQLgQHsTJZqf-RDhU9eDi6Ordi-fS5ElLV9u3kvw5Y3iwv2LBIlDWtHf_phSjzApvd0KwI1iqq_u5PthpFmADUfMNwYMEq1mjprNnrPvnYIYhsur2cN1nqD9s0XfhusEqpAUMrMU8fFuA_1iH1a6TZ9pJmwaNWo450H6sKEebjdn4fPisV1cbvRr71wYBeMn-h4vBjPJ-Ay-PoNcUf1aFLffmJNm73wkfUSuvwo5wY9dooJzT0gGsqw2aE54GQ8csHzmfw4J0PTCPfMkDA4STu62I4Mi6wFyIBx4L6oN3oeEtCJ2djeQ2-jPwQ3RyxP_T_vimfk4qEDpnLYwewBbeDHPVKtAg6OQSqhz4vDmKWC9NfZpf5Tgf19tHVBdu_APIo4-FN4CU5_mTsWUNgvCwY3A0TuqXLkUfnzIddQUw_-Xj5xdLS5Gzm6cmXPXhAPRIWLpKG4MR98aDnfq1MSk_55jFENiR0VX5Va2RFPR_2bwXlgMA6nU2dbGoT4yswUxluf65p3-N7QEa5jICn4uncq2JP1ogQEyi2GCRss0oj4MHrO1ZidfGu4xSExZIFH4FAsZZXPk_W1cvKaaEuKf8I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Admin\",\r\n    \"permissions\": [1, 2] // nullable\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{laravel_base_url}}/api/roles/1",
+							"host": [
+								"{{laravel_base_url}}"
+							],
+							"path": [
+								"api",
+								"roles",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjVkMGFhNTNhN2MyOGI4M2IxZTJkMDM4NGI1NDk3MDJmYmZjOWZlN2M3OGRkMmExMzhkNDRlOTJiMWRkOTkzYzU0ZGQ2OTA1OWIzMjM0ZGEiLCJpYXQiOjE3MzM2NjE2MjkuOTE3ODg3LCJuYmYiOjE3MzM2NjE2MjkuOTE3ODg5LCJleHAiOjE3NjUxOTc2MjkuOTEyNDU2LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.KVDSMEsSPKGujbKuTbtJhubsLxI7mEhiED4fOwd1mJmE56ovMHKKvEYa9D79m9URhVxuUkxuer_cwdG-kCfKelQLgQHsTJZqf-RDhU9eDi6Ordi-fS5ElLV9u3kvw5Y3iwv2LBIlDWtHf_phSjzApvd0KwI1iqq_u5PthpFmADUfMNwYMEq1mjprNnrPvnYIYhsur2cN1nqD9s0XfhusEqpAUMrMU8fFuA_1iH1a6TZ9pJmwaNWo450H6sKEebjdn4fPisV1cbvRr71wYBeMn-h4vBjPJ-Ay-PoNcUf1aFLffmJNm73wkfUSuvwo5wY9dooJzT0gGsqw2aE54GQ8csHzmfw4J0PTCPfMkDA4STu62I4Mi6wFyIBx4L6oN3oeEtCJ2djeQ2-jPwQ3RyxP_T_vimfk4qEDpnLYwewBbeDHPVKtAg6OQSqhz4vDmKWC9NfZpf5Tgf19tHVBdu_APIo4-FN4CU5_mTsWUNgvCwY3A0TuqXLkUfnzIddQUw_-Xj5xdLS5Gzm6cmXPXhAPRIWLpKG4MR98aDnfq1MSk_55jFENiR0VX5Va2RFPR_2bwXlgMA6nU2dbGoT4yswUxluf65p3-N7QEa5jICn4uncq2JP1ogQEyi2GCRss0oj4MHrO1ZidfGu4xSExZIFH4FAsZZXPk_W1cvKaaEuKf8I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{laravel_base_url}}/api/roles/10",
+							"host": [
+								"{{laravel_base_url}}"
+							],
+							"path": [
+								"api",
+								"roles",
+								"10"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assign-permissions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjVkMGFhNTNhN2MyOGI4M2IxZTJkMDM4NGI1NDk3MDJmYmZjOWZlN2M3OGRkMmExMzhkNDRlOTJiMWRkOTkzYzU0ZGQ2OTA1OWIzMjM0ZGEiLCJpYXQiOjE3MzM2NjE2MjkuOTE3ODg3LCJuYmYiOjE3MzM2NjE2MjkuOTE3ODg5LCJleHAiOjE3NjUxOTc2MjkuOTEyNDU2LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.KVDSMEsSPKGujbKuTbtJhubsLxI7mEhiED4fOwd1mJmE56ovMHKKvEYa9D79m9URhVxuUkxuer_cwdG-kCfKelQLgQHsTJZqf-RDhU9eDi6Ordi-fS5ElLV9u3kvw5Y3iwv2LBIlDWtHf_phSjzApvd0KwI1iqq_u5PthpFmADUfMNwYMEq1mjprNnrPvnYIYhsur2cN1nqD9s0XfhusEqpAUMrMU8fFuA_1iH1a6TZ9pJmwaNWo450H6sKEebjdn4fPisV1cbvRr71wYBeMn-h4vBjPJ-Ay-PoNcUf1aFLffmJNm73wkfUSuvwo5wY9dooJzT0gGsqw2aE54GQ8csHzmfw4J0PTCPfMkDA4STu62I4Mi6wFyIBx4L6oN3oeEtCJ2djeQ2-jPwQ3RyxP_T_vimfk4qEDpnLYwewBbeDHPVKtAg6OQSqhz4vDmKWC9NfZpf5Tgf19tHVBdu_APIo4-FN4CU5_mTsWUNgvCwY3A0TuqXLkUfnzIddQUw_-Xj5xdLS5Gzm6cmXPXhAPRIWLpKG4MR98aDnfq1MSk_55jFENiR0VX5Va2RFPR_2bwXlgMA6nU2dbGoT4yswUxluf65p3-N7QEa5jICn4uncq2JP1ogQEyi2GCRss0oj4MHrO1ZidfGu4xSExZIFH4FAsZZXPk_W1cvKaaEuKf8I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"permissions\": [1, 2, 3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{laravel_base_url}}/api/roles/9/permissions",
+							"host": [
+								"{{laravel_base_url}}"
+							],
+							"path": [
+								"api",
+								"roles",
+								"9",
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "permissions",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjVkMGFhNTNhN2MyOGI4M2IxZTJkMDM4NGI1NDk3MDJmYmZjOWZlN2M3OGRkMmExMzhkNDRlOTJiMWRkOTkzYzU0ZGQ2OTA1OWIzMjM0ZGEiLCJpYXQiOjE3MzM2NjE2MjkuOTE3ODg3LCJuYmYiOjE3MzM2NjE2MjkuOTE3ODg5LCJleHAiOjE3NjUxOTc2MjkuOTEyNDU2LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.KVDSMEsSPKGujbKuTbtJhubsLxI7mEhiED4fOwd1mJmE56ovMHKKvEYa9D79m9URhVxuUkxuer_cwdG-kCfKelQLgQHsTJZqf-RDhU9eDi6Ordi-fS5ElLV9u3kvw5Y3iwv2LBIlDWtHf_phSjzApvd0KwI1iqq_u5PthpFmADUfMNwYMEq1mjprNnrPvnYIYhsur2cN1nqD9s0XfhusEqpAUMrMU8fFuA_1iH1a6TZ9pJmwaNWo450H6sKEebjdn4fPisV1cbvRr71wYBeMn-h4vBjPJ-Ay-PoNcUf1aFLffmJNm73wkfUSuvwo5wY9dooJzT0gGsqw2aE54GQ8csHzmfw4J0PTCPfMkDA4STu62I4Mi6wFyIBx4L6oN3oeEtCJ2djeQ2-jPwQ3RyxP_T_vimfk4qEDpnLYwewBbeDHPVKtAg6OQSqhz4vDmKWC9NfZpf5Tgf19tHVBdu_APIo4-FN4CU5_mTsWUNgvCwY3A0TuqXLkUfnzIddQUw_-Xj5xdLS5Gzm6cmXPXhAPRIWLpKG4MR98aDnfq1MSk_55jFENiR0VX5Va2RFPR_2bwXlgMA6nU2dbGoT4yswUxluf65p3-N7QEa5jICn4uncq2JP1ogQEyi2GCRss0oj4MHrO1ZidfGu4xSExZIFH4FAsZZXPk_W1cvKaaEuKf8I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{laravel_base_url}}/api/permissions",
+							"host": [
+								"{{laravel_base_url}}"
+							],
+							"path": [
+								"api",
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjVkMGFhNTNhN2MyOGI4M2IxZTJkMDM4NGI1NDk3MDJmYmZjOWZlN2M3OGRkMmExMzhkNDRlOTJiMWRkOTkzYzU0ZGQ2OTA1OWIzMjM0ZGEiLCJpYXQiOjE3MzM2NjE2MjkuOTE3ODg3LCJuYmYiOjE3MzM2NjE2MjkuOTE3ODg5LCJleHAiOjE3NjUxOTc2MjkuOTEyNDU2LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.KVDSMEsSPKGujbKuTbtJhubsLxI7mEhiED4fOwd1mJmE56ovMHKKvEYa9D79m9URhVxuUkxuer_cwdG-kCfKelQLgQHsTJZqf-RDhU9eDi6Ordi-fS5ElLV9u3kvw5Y3iwv2LBIlDWtHf_phSjzApvd0KwI1iqq_u5PthpFmADUfMNwYMEq1mjprNnrPvnYIYhsur2cN1nqD9s0XfhusEqpAUMrMU8fFuA_1iH1a6TZ9pJmwaNWo450H6sKEebjdn4fPisV1cbvRr71wYBeMn-h4vBjPJ-Ay-PoNcUf1aFLffmJNm73wkfUSuvwo5wY9dooJzT0gGsqw2aE54GQ8csHzmfw4J0PTCPfMkDA4STu62I4Mi6wFyIBx4L6oN3oeEtCJ2djeQ2-jPwQ3RyxP_T_vimfk4qEDpnLYwewBbeDHPVKtAg6OQSqhz4vDmKWC9NfZpf5Tgf19tHVBdu_APIo4-FN4CU5_mTsWUNgvCwY3A0TuqXLkUfnzIddQUw_-Xj5xdLS5Gzm6cmXPXhAPRIWLpKG4MR98aDnfq1MSk_55jFENiR0VX5Va2RFPR_2bwXlgMA6nU2dbGoT4yswUxluf65p3-N7QEa5jICn4uncq2JP1ogQEyi2GCRss0oj4MHrO1ZidfGu4xSExZIFH4FAsZZXPk_W1cvKaaEuKf8I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Manage user\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{laravel_base_url}}/api/permissions/2",
+							"host": [
+								"{{laravel_base_url}}"
+							],
+							"path": [
+								"api",
+								"permissions",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjVkMGFhNTNhN2MyOGI4M2IxZTJkMDM4NGI1NDk3MDJmYmZjOWZlN2M3OGRkMmExMzhkNDRlOTJiMWRkOTkzYzU0ZGQ2OTA1OWIzMjM0ZGEiLCJpYXQiOjE3MzM2NjE2MjkuOTE3ODg3LCJuYmYiOjE3MzM2NjE2MjkuOTE3ODg5LCJleHAiOjE3NjUxOTc2MjkuOTEyNDU2LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.KVDSMEsSPKGujbKuTbtJhubsLxI7mEhiED4fOwd1mJmE56ovMHKKvEYa9D79m9URhVxuUkxuer_cwdG-kCfKelQLgQHsTJZqf-RDhU9eDi6Ordi-fS5ElLV9u3kvw5Y3iwv2LBIlDWtHf_phSjzApvd0KwI1iqq_u5PthpFmADUfMNwYMEq1mjprNnrPvnYIYhsur2cN1nqD9s0XfhusEqpAUMrMU8fFuA_1iH1a6TZ9pJmwaNWo450H6sKEebjdn4fPisV1cbvRr71wYBeMn-h4vBjPJ-Ay-PoNcUf1aFLffmJNm73wkfUSuvwo5wY9dooJzT0gGsqw2aE54GQ8csHzmfw4J0PTCPfMkDA4STu62I4Mi6wFyIBx4L6oN3oeEtCJ2djeQ2-jPwQ3RyxP_T_vimfk4qEDpnLYwewBbeDHPVKtAg6OQSqhz4vDmKWC9NfZpf5Tgf19tHVBdu_APIo4-FN4CU5_mTsWUNgvCwY3A0TuqXLkUfnzIddQUw_-Xj5xdLS5Gzm6cmXPXhAPRIWLpKG4MR98aDnfq1MSk_55jFENiR0VX5Va2RFPR_2bwXlgMA6nU2dbGoT4yswUxluf65p3-N7QEa5jICn4uncq2JP1ogQEyi2GCRss0oj4MHrO1ZidfGu4xSExZIFH4FAsZZXPk_W1cvKaaEuKf8I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{laravel_base_url}}/api/permissions/2",
+							"host": [
+								"{{laravel_base_url}}"
+							],
+							"path": [
+								"api",
+								"permissions",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "user",
+			"item": [
+				{
+					"name": "get-all-user-permissions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjVkMGFhNTNhN2MyOGI4M2IxZTJkMDM4NGI1NDk3MDJmYmZjOWZlN2M3OGRkMmExMzhkNDRlOTJiMWRkOTkzYzU0ZGQ2OTA1OWIzMjM0ZGEiLCJpYXQiOjE3MzM2NjE2MjkuOTE3ODg3LCJuYmYiOjE3MzM2NjE2MjkuOTE3ODg5LCJleHAiOjE3NjUxOTc2MjkuOTEyNDU2LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.KVDSMEsSPKGujbKuTbtJhubsLxI7mEhiED4fOwd1mJmE56ovMHKKvEYa9D79m9URhVxuUkxuer_cwdG-kCfKelQLgQHsTJZqf-RDhU9eDi6Ordi-fS5ElLV9u3kvw5Y3iwv2LBIlDWtHf_phSjzApvd0KwI1iqq_u5PthpFmADUfMNwYMEq1mjprNnrPvnYIYhsur2cN1nqD9s0XfhusEqpAUMrMU8fFuA_1iH1a6TZ9pJmwaNWo450H6sKEebjdn4fPisV1cbvRr71wYBeMn-h4vBjPJ-Ay-PoNcUf1aFLffmJNm73wkfUSuvwo5wY9dooJzT0gGsqw2aE54GQ8csHzmfw4J0PTCPfMkDA4STu62I4Mi6wFyIBx4L6oN3oeEtCJ2djeQ2-jPwQ3RyxP_T_vimfk4qEDpnLYwewBbeDHPVKtAg6OQSqhz4vDmKWC9NfZpf5Tgf19tHVBdu_APIo4-FN4CU5_mTsWUNgvCwY3A0TuqXLkUfnzIddQUw_-Xj5xdLS5Gzm6cmXPXhAPRIWLpKG4MR98aDnfq1MSk_55jFENiR0VX5Va2RFPR_2bwXlgMA6nU2dbGoT4yswUxluf65p3-N7QEa5jICn4uncq2JP1ogQEyi2GCRss0oj4MHrO1ZidfGu4xSExZIFH4FAsZZXPk_W1cvKaaEuKf8I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{laravel_base_url}}/api/users/1/permissions",
+							"host": [
+								"{{laravel_base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1",
+								"permissions"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assign-permissions",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjVkMGFhNTNhN2MyOGI4M2IxZTJkMDM4NGI1NDk3MDJmYmZjOWZlN2M3OGRkMmExMzhkNDRlOTJiMWRkOTkzYzU0ZGQ2OTA1OWIzMjM0ZGEiLCJpYXQiOjE3MzM2NjE2MjkuOTE3ODg3LCJuYmYiOjE3MzM2NjE2MjkuOTE3ODg5LCJleHAiOjE3NjUxOTc2MjkuOTEyNDU2LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.KVDSMEsSPKGujbKuTbtJhubsLxI7mEhiED4fOwd1mJmE56ovMHKKvEYa9D79m9URhVxuUkxuer_cwdG-kCfKelQLgQHsTJZqf-RDhU9eDi6Ordi-fS5ElLV9u3kvw5Y3iwv2LBIlDWtHf_phSjzApvd0KwI1iqq_u5PthpFmADUfMNwYMEq1mjprNnrPvnYIYhsur2cN1nqD9s0XfhusEqpAUMrMU8fFuA_1iH1a6TZ9pJmwaNWo450H6sKEebjdn4fPisV1cbvRr71wYBeMn-h4vBjPJ-Ay-PoNcUf1aFLffmJNm73wkfUSuvwo5wY9dooJzT0gGsqw2aE54GQ8csHzmfw4J0PTCPfMkDA4STu62I4Mi6wFyIBx4L6oN3oeEtCJ2djeQ2-jPwQ3RyxP_T_vimfk4qEDpnLYwewBbeDHPVKtAg6OQSqhz4vDmKWC9NfZpf5Tgf19tHVBdu_APIo4-FN4CU5_mTsWUNgvCwY3A0TuqXLkUfnzIddQUw_-Xj5xdLS5Gzm6cmXPXhAPRIWLpKG4MR98aDnfq1MSk_55jFENiR0VX5Va2RFPR_2bwXlgMA6nU2dbGoT4yswUxluf65p3-N7QEa5jICn4uncq2JP1ogQEyi2GCRss0oj4MHrO1ZidfGu4xSExZIFH4FAsZZXPk_W1cvKaaEuKf8I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"permissions\": [3]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{laravel_base_url}}/api/users/1/permission",
+							"host": [
+								"{{laravel_base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1",
+								"permission"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "assign-roles",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIxIiwianRpIjoiZjVkMGFhNTNhN2MyOGI4M2IxZTJkMDM4NGI1NDk3MDJmYmZjOWZlN2M3OGRkMmExMzhkNDRlOTJiMWRkOTkzYzU0ZGQ2OTA1OWIzMjM0ZGEiLCJpYXQiOjE3MzM2NjE2MjkuOTE3ODg3LCJuYmYiOjE3MzM2NjE2MjkuOTE3ODg5LCJleHAiOjE3NjUxOTc2MjkuOTEyNDU2LCJzdWIiOiIzIiwic2NvcGVzIjpbXX0.KVDSMEsSPKGujbKuTbtJhubsLxI7mEhiED4fOwd1mJmE56ovMHKKvEYa9D79m9URhVxuUkxuer_cwdG-kCfKelQLgQHsTJZqf-RDhU9eDi6Ordi-fS5ElLV9u3kvw5Y3iwv2LBIlDWtHf_phSjzApvd0KwI1iqq_u5PthpFmADUfMNwYMEq1mjprNnrPvnYIYhsur2cN1nqD9s0XfhusEqpAUMrMU8fFuA_1iH1a6TZ9pJmwaNWo450H6sKEebjdn4fPisV1cbvRr71wYBeMn-h4vBjPJ-Ay-PoNcUf1aFLffmJNm73wkfUSuvwo5wY9dooJzT0gGsqw2aE54GQ8csHzmfw4J0PTCPfMkDA4STu62I4Mi6wFyIBx4L6oN3oeEtCJ2djeQ2-jPwQ3RyxP_T_vimfk4qEDpnLYwewBbeDHPVKtAg6OQSqhz4vDmKWC9NfZpf5Tgf19tHVBdu_APIo4-FN4CU5_mTsWUNgvCwY3A0TuqXLkUfnzIddQUw_-Xj5xdLS5Gzm6cmXPXhAPRIWLpKG4MR98aDnfq1MSk_55jFENiR0VX5Va2RFPR_2bwXlgMA6nU2dbGoT4yswUxluf65p3-N7QEa5jICn4uncq2JP1ogQEyi2GCRss0oj4MHrO1ZidfGu4xSExZIFH4FAsZZXPk_W1cvKaaEuKf8I",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"roles\": [1, 2]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{laravel_base_url}}/api/users/1/roles",
+							"host": [
+								"{{laravel_base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1",
+								"roles"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "laravel_base_url",
+			"value": "http://127.0.0.1:8000"
+		}
+	]
+}
