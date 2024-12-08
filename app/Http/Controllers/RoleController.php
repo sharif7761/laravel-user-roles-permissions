@@ -25,6 +25,7 @@ class RoleController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'permissions' => 'nullable|array',
+            'permissions.*' => 'exists:permissions,id',
         ]);
 
         $role = $this->roleRepository->createRole($request->all());
@@ -37,6 +38,7 @@ class RoleController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'permissions' => 'nullable|array',
+            'permissions.*' => 'exists:permissions,id',
         ]);
 
         $role = $this->roleRepository->updateRole($id, $request->all());
@@ -55,6 +57,7 @@ class RoleController extends Controller
     {
         $request->validate([
             'permissions' => 'required|array',
+            'permissions.*' => 'exists:permissions,id',
         ]);
 
         $role = $this->roleRepository->assignPermissionsToRole($roleId, $request->permissions);

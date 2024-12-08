@@ -2,6 +2,7 @@
 
 namespace App\Exceptions;
 
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
@@ -44,5 +45,19 @@ class Handler extends ExceptionHandler
         $this->reportable(function (Throwable $e) {
             //
         });
+    }
+
+    public function render($request, Throwable $exception)
+    {
+        // Handle ModelNotFoundException globally
+        if ($exception instanceof ModelNotFoundException) {
+            $modelName = class_basename($exception->getModel());
+            return response()->json([
+                'message' => "{$modelName} not found.",
+            ], 404);
+        }
+
+        // Default render for other exceptions
+        return parent::render($request, $exception);
     }
 }
