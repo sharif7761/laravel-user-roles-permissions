@@ -62,3 +62,23 @@ php artisan serve
 
 ### **Step 8: Import postman collection**
 postman collection is attached in the mail and root of the project as `laravel-user-roles-permissions-app.postman_collection.json`. Import it in your postman and test the code
+
+## **API Endpoints**
+
+### **Authentication**
+- **POST** `/api/register` - User registration.
+- **POST** `/api/login` - User login and token generation.
+
+### **User Management**
+- **POST** `/api/users/{userId}/roles` - Assign roles to a user.
+- **GET** `/api/users/{userId}/permissions` - Retrieve all permissions of a user.
+- **POST** `/api/users/{userId}/permission` - Assign a permission directly to a user.
+
+### **Role Management**
+- **GET, POST, PUT, DELETE** `/api/roles` - Role CRUD operations.
+- **POST** `/api/roles/{roleId}/permissions` - Assign permissions to a role.
+
+### **Permission Management**
+- **GET, POST, PUT, DELETE** `/api/permissions` - Permission CRUD operations.
+
+---
