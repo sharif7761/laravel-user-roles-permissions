@@ -49,6 +49,19 @@ class User extends Authenticatable
 
     public function permissions()
     {
-        return $this->roles->flatMap->permissions->unique();
+        return $this->belongsToMany(Permission::class, 'permission_user');
+    }
+
+    public function getAllPermissions()
+    {
+        $rolePermissions = $this->roles()->with('permissions')->get()
+            ->pluck('permissions')
+            ->flatten()
+            ->pluck('name')
+            ->toArray();
+
+        $directPermissions = $this->permissions()->pluck('name')->toArray();
+
+        return array_unique(array_merge($rolePermissions, $directPermissions));
     }
 }

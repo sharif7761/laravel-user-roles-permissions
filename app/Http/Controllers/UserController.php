@@ -19,4 +19,25 @@ class UserController extends Controller
 
         return response()->json(['message' => 'Roles assigned successfully', 'user' => $user->load('roles')]);
     }
+
+    public function assignPermission(Request $request, $userId)
+    {
+        $request->validate([
+            'permissions' => 'required|array',
+            'permissions.*' => 'exists:permissions,id',
+        ]);
+
+        $user = User::findOrFail($userId);
+        $user->permissions()->syncWithoutDetaching($request->permissions);
+
+        return response()->json(['message' => 'Permissions assigned successfully', 'user' => $user->load('permissions')]);
+    }
+
+    public function getUserPermissions($userId)
+    {
+        $user = User::findOrFail($userId);
+        $permissions = $user->getAllPermissions();
+
+        return response()->json(['permissions' => $permissions]);
+    }
 }

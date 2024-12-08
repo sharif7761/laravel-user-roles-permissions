@@ -33,6 +33,8 @@ Route::group(['middleware' => ['auth:api']], function() {
 
     // User Role Assignment
     Route::post('users/{userId}/roles', [UserController::class, 'assignRoles']);
+    Route::get('users/{userId}/permissions', [UserController::class, 'getUserPermissions']);
+    Route::post('users/{userId}/permission', [UserController::class, 'assignPermission']);
 
     // Permission Routes
     Route::resource('permissions', PermissionController::class);
