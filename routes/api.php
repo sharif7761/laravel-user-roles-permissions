@@ -1,7 +1,9 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PermissionController;
 use App\Http\Controllers\RoleController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -31,4 +33,7 @@ Route::group(['middleware' => ['auth:api']], function() {
 
     // User Role Assignment
     Route::post('users/{userId}/roles', [UserController::class, 'assignRoles']);
+
+    // Permission Routes
+    Route::resource('permissions', PermissionController::class);
 });
