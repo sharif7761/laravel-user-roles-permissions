@@ -1,66 +1,114 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# **Laravel RESTful API for User, Role, and Permission Management**
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+This project is a RESTful API built with Laravel  and Passport for managing users, roles, and permissions.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## **Features**
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### **User Management**
+- Users can have multiple roles.
+- Users can have multiple permissions, either directly assigned or inherited through roles.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+### **Role Management**
+- Roles can have multiple permissions.
 
-## Learning Laravel
+### **Permission Management**
+- CRUD operations for permissions.
+- Assign permissions to roles and users.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+### **Authentication**
+- Secure token-based authentication using Laravel Passport.
+- Routes are protected by middleware.
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+### **Authorization**
+- Middleware verifies a user's permissions before granting access to specific API routes.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 2000 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### **Clean Architecture**
+- Repository Pattern ensures maintainable and testable code.
+- Follows PSR coding standards for clean and consistent coding.
 
-## Laravel Sponsors
+---
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+## **API Endpoints**
 
-### Premium Partners
+### **Authentication**
+- **POST** `/api/register` - User registration.
+- **POST** `/api/login` - User login and token generation.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+### **User Management**
+- **POST** `/api/users/{userId}/roles` - Assign roles to a user.
+- **GET** `/api/users/{userId}/permissions` - Retrieve all permissions of a user.
+- **POST** `/api/users/{userId}/permission` - Assign a permission directly to a user.
 
-## Contributing
+### **Role Management**
+- **GET, POST, PUT, DELETE** `/api/roles` - Role CRUD operations.
+- **POST** `/api/roles/{roleId}/permissions` - Assign permissions to a role.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+### **Permission Management**
+- **GET, POST, PUT, DELETE** `/api/permissions` - Permission CRUD operations.
 
-## Code of Conduct
+---
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## **Setup Instructions**
 
-## Security Vulnerabilities
+### **Step 1: Clone the Repository**
+```bash
+git clone https://github.com/sharif7761/laravel-user-roles-permissions.git
+cd laravel-restful-api
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### **Step 2: Install Dependencies**
+Run the following command to install all required PHP dependencies for the project:
 
-## License
+```bash
+composer install
+```
+### **Step 3: Set Up Environment Variables**
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. Copy the `.env.example` file to `.env`:
+   ```bash
+   cp .env.example .env
+   ```
+2. Open the `.env` file and configure your database connection:
+```bash
+   DB_CONNECTION=mysql
+   DB_HOST=127.0.0.1
+   DB_PORT=3306
+   DB_DATABASE=your_database_name
+   DB_USERNAME=your_database_user
+   DB_PASSWORD=your_database_password
+```
+
+### **Step 4: Generate Application Key**
+
+Run the following command to generate the application key required for encryption:
+```bash
+php artisan key:generate
+```
+### **Step 5: Run Database Migrations**
+
+Execute the following command to run the migrations and create the necessary database tables:
+
+```bash
+php artisan migrate
+```
+
+
+### **Step 6: Install Passport Keys**
+
+Run the following command to generate Passport keys for token-based authentication:
+
+```bash
+php artisan passport:install
+```
+### **Step 7: Start the Development Server**
+
+To start the development server, run the following command:
+
+```bash
+php artisan serve
+```
+
+### **Step 8: Import postman collection**
+postman collection is attached in the mail and root of the project as `laravel-user-roles-permissions-app.postman_collection.json`. Import it in your postman and test the code
