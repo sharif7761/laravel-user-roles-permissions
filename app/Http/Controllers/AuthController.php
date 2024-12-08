@@ -2,15 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Repositories\Contracts\AuthRepositoryInterface;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
 class AuthController extends Controller
 {
-    public function register(Request $request){
+    protected $authRepository;
+
+    public function __construct(AuthRepositoryInterface $authRepository)
+    {
+        $this->authRepository = $authRepository;
+    }
+
+    public function register(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255|unique:users',
@@ -21,49 +27,57 @@ class AuthController extends Controller
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password),
-        ]);
+        $user = $this->authRepository->register($request->all());
 
         return response()->json([
             'message' => 'User registered successfully',
             'user' => $user,
         ], 201);
-
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         $credentials = $request->validate([
             'email' => 'required|email',
             'password' => 'required',
         ]);
 
-        if (!Auth::attempt($credentials)) {
+        $token = $this->authRepository->login($credentials);
+
+        if (!$token) {
             return response()->json(['error' => 'Invalid credentials'], 401);
         }
 
-        $user = Auth::user();
-        $token = $user->createToken('myToken')->accessToken;
         return response()->json([
             'message' => 'Login successful',
-            'token' => $token
+            'token' => $token,
         ]);
     }
 
-    public function logout(){
-        auth()->user()->token()->revoke();
+    public function logout()
+    {
+        $loggedOut = $this->authRepository->logout();
+
+        if (!$loggedOut) {
+            return response()->json(['error' => 'User not logged in'], 401);
+        }
+
         return response()->json([
             'message' => 'Logged out successfully',
         ]);
     }
 
-    public function profile(){
-        $user = Auth::user();
+    public function profile()
+    {
+        $user = $this->authRepository->profile();
+
+        if (!$user) {
+            return response()->json(['error' => 'User not authenticated'], 401);
+        }
+
         return response()->json([
-            "message" => "Profile info",
-            "user" => $user
+            'message' => 'Profile info',
+            'user' => $user,
         ]);
     }
 }

@@ -2,22 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
+use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function assignRoles(Request $request, $userId)
+    protected $userRepository;
+
+    public function __construct(UserRepositoryInterface $userRepository)
     {
-        $request->validate([
-            'roles' => 'required|array',
-            'roles.*' => 'exists:roles,id',
-        ]);
-
-        $user = User::findOrFail($userId);
-        $user->roles()->sync($request->roles);
-
-        return response()->json(['message' => 'Roles assigned successfully', 'user' => $user->load('roles')]);
+        $this->userRepository = $userRepository;
     }
 
     public function assignPermission(Request $request, $userId)
@@ -27,17 +21,30 @@ class UserController extends Controller
             'permissions.*' => 'exists:permissions,id',
         ]);
 
-        $user = User::findOrFail($userId);
-        $user->permissions()->syncWithoutDetaching($request->permissions);
+        $permissions = $this->userRepository->assignPermission($userId, $request->permissions);
 
-        return response()->json(['message' => 'Permissions assigned successfully', 'user' => $user->load('permissions')]);
+        return response()->json(['message' => 'Permissions assigned successfully', 'permissions' => $permissions]);
     }
 
     public function getUserPermissions($userId)
     {
-        $user = User::findOrFail($userId);
-        $permissions = $user->getAllPermissions();
+        $permissions = $this->userRepository->getAllPermissions($userId);
 
         return response()->json(['permissions' => $permissions]);
+    }
+
+    public function assignRoles(Request $request, $userId)
+    {
+        $request->validate([
+            'roles' => 'required|array',
+            'roles.*' => 'exists:roles,id',
+        ]);
+
+        $user = $this->userRepository->assignRolesToUser($userId, $request->roles);
+
+        return response()->json([
+            'message' => 'Roles assigned to user successfully',
+            'user' => $user,
+        ], 200);
     }
 }

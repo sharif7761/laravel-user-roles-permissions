@@ -2,51 +2,37 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Permission;
+use App\Repositories\Contracts\PermissionRepositoryInterface;
 use Illuminate\Http\Request;
 
 class PermissionController extends Controller
 {
-    public function index()
+    protected $permissionRepository;
+
+    public function __construct(PermissionRepositoryInterface $permissionRepository)
     {
-        $permissions = Permission::all();
-        return response()->json($permissions);
+        $this->permissionRepository = $permissionRepository;
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|unique:permissions',
-        ]);
+        $data = $request->validate(['name' => 'required|string|unique:permissions']);
+        $permission = $this->permissionRepository->create($data);
 
-        $permission = Permission::create(['name' => $request->name]);
-
-        return response()->json(['message' => 'Permission created successfully', 'permission' => $permission], 201);
+        return response()->json(['message' => 'Permission created successfully', 'permission' => $permission]);
     }
 
-    public function show($id)
+    public function update(Request $request, $permissionId)
     {
-        $permission = Permission::findOrFail($id);
-        return response()->json($permission);
-    }
-
-    public function update(Request $request, $id)
-    {
-        $permission = Permission::findOrFail($id);
-
-        $request->validate([
-            'name' => 'required|string|unique:permissions,name,' . $id,
-        ]);
-
-        $permission->update(['name' => $request->name]);
+        $data = $request->validate(['name' => 'required|string|unique:permissions,name,' . $permissionId]);
+        $permission = $this->permissionRepository->update($permissionId, $data);
 
         return response()->json(['message' => 'Permission updated successfully', 'permission' => $permission]);
     }
 
-    public function destroy($id)
+    public function destroy($permissionId)
     {
-        $permission = Permission::findOrFail($id);
-        $permission->delete();
+        $this->permissionRepository->delete($permissionId);
 
         return response()->json(['message' => 'Permission deleted successfully']);
     }

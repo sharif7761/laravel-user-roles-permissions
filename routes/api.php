@@ -28,6 +28,7 @@ Route::post('login', [AuthController::class, 'login'])->name('login');
 Route::group(['middleware' => ['auth:api']], function() {
     Route::get('profile', [AuthController::class, 'profile']);
     Route::get('logout', [AuthController::class, 'logout']);
+
     Route::resource('roles', RoleController::class);
     Route::post('roles/{roleId}/permissions', [RoleController::class, 'assignPermissions']);
 
