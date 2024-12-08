@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RoleRequest;
 use App\Repositories\Contracts\RoleRepositoryInterface;
 use Illuminate\Http\Request;
 
@@ -20,27 +21,15 @@ class RoleController extends Controller
         return response()->json(['roles' => $roles], 200);
     }
 
-    public function store(Request $request)
+    public function store(RoleRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'permissions' => 'nullable|array',
-            'permissions.*' => 'exists:permissions,id',
-        ]);
-
         $role = $this->roleRepository->createRole($request->all());
 
         return response()->json(['message' => 'Role created successfully', 'role' => $role], 201);
     }
 
-    public function update(Request $request, $id)
+    public function update(RoleRequest $request, $id)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'permissions' => 'nullable|array',
-            'permissions.*' => 'exists:permissions,id',
-        ]);
-
         $role = $this->roleRepository->updateRole($id, $request->all());
 
         return response()->json(['message' => 'Role updated successfully', 'role' => $role], 200);
